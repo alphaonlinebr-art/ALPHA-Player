@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>ALPHA: Nova Era BRAZIL - Player Dinâmico</title>
+    <title>ALPHA: Nova Era BRAZIL - Seleção Precisa</title>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
     
     <style>
@@ -40,7 +40,6 @@
         .btn-nav { background: #1a1a1a; color: #cd7f32; border: 1px solid #cd7f32; padding: 10px 20px; font-size: 18px; cursor: pointer; border-radius: 5px; transition: 0.2s; font-family: 'Oswald'; }
         .btn-main { padding: 15px 40px; font-size: 16px; color: #000; background: linear-gradient(135deg, #cd7f32, #a0522d); border: none; border-radius: 5px; cursor: pointer; box-shadow: 3px 3px 15px rgba(0,0,0,0.7); transition: 0.2s; font-family: 'Oswald'; font-weight: 700; }
         
-        /* Estilo do Botão de Upload */
         .upload-label {
             margin-top: 20px; display: inline-block; font-size: 10px; color: #555;
             cursor: pointer; border: 1px dashed #333; padding: 5px 10px; border-radius: 4px;
@@ -61,7 +60,7 @@
 
     <div class="controls">
         <h1>ALPHA: Nova Era BRAZIL</h1>
-        <div id="track-info">Aguardando Manifesto...</div>
+        <div id="track-info">Sincronizando Frequência...</div>
         
         <div class="nav-group">
             <button class="btn-nav" id="prevBtn">❮</button>
@@ -69,8 +68,8 @@
             <button class="btn-nav" id="nextBtn">❯</button>
         </div>
 
-        <label for="fileInput" class="upload-label">Sincronizar Pasta Local</label>
-        <input type="file" id="fileInput" webkitdirectory directory multiple accept="audio/*">
+        <label for="fileInput" class="upload-label">Sincronizar Arquivos Específicos</label>
+        <input type="file" id="fileInput" multiple accept="audio/*">
 
         <p class="manifesto-text">Som, O 1° Manifesto Da ARTE!</p>
     </div>
@@ -112,13 +111,12 @@
             }).catch(e => console.log("Erro ao reproduzir."));
         }
 
-        // Lógica para carregar arquivos locais
         fileInput.onchange = function(e) {
             const files = Array.from(e.target.files);
             if (files.length > 0) {
-                // Limpa a playlist atual e adiciona os arquivos locais
+                // Mapeia os arquivos selecionados para a playlist
                 playlist = files.map(file => ({
-                    title: file.name.replace(/\.[^/.]+$/, ""), // Remove a extensão do nome
+                    title: file.name.replace(/\.[^/.]+$/, ""),
                     url: URL.createObjectURL(file)
                 }));
                 loadTrack(0);
@@ -170,16 +168,13 @@
                 needle.style.transform = `translateX(-50%) rotate(-45deg)`;
                 return;
             }
-
             analyser.getByteFrequencyData(dataArray);
             let sum = 0;
             for (let i = 0; i < 40; i++) sum += dataArray[i];
             let average = sum / 40;
-
             let rotation = (average / 180) * 70 - 40; 
             if (rotation > 38) rotation = 38; 
             if (rotation < -43) rotation = -43;
-
             needle.style.transform = `translateX(-50%) rotate(${rotation}deg)`;
         }
     </script>
