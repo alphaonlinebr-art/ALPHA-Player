@@ -23,7 +23,7 @@
         .needle {
             position: absolute; width: 3px; height: 42%; background: #cc0000;
             bottom: 22%; left: 50%; transform-origin: bottom center;
-            transform: translateX(-50%) rotate(-45deg); z-index: 10;
+            transform: translateX(-50%) rotate(-90deg); z-index: 10;
             transition: transform 0.1s ease-out;
         }
 
@@ -168,9 +168,10 @@
             }
             if (audio.paused) playTrack();
             else {
-                audio.pause();
-                playBtn.innerText = "ATIVE O MANIFESTO";
-            }
+    audio.pause();
+    audio.currentTime = 0;
+    playBtn.innerText = "ATIVE O MANIFESTO";
+}
         };
 
         document.getElementById('nextBtn').onclick = () => {
@@ -185,12 +186,15 @@
             playTrack();
         };
 
-        audio.onended = () => document.getElementById('nextBtn').click();
+        audio.onended = () => {
+    audio.currentTime = 0;
+    playBtn.innerText = "ATIVE O MANIFESTO";
+};
 
         function updateVU() {
             requestAnimationFrame(updateVU);
             if (!analyser || audio.paused) {
-                needle.style.transform = `translateX(-50%) rotate(-45deg)`;
+                needle.style.transform = `translateX(-50%) rotate(-90deg)`;
                 return;
             }
             analyser.getByteFrequencyData(dataArray);
@@ -199,7 +203,7 @@
             let average = sum / 40;
             let rotation = (average / 180) * 70 - 40; 
             if (rotation > 48) rotation = 48;
-            if (rotation < -45) rotation = -45;
+            if (rotation < -90) rotation = -90;
             needle.style.transform = `translateX(-50%) rotate(${rotation}deg)`;
         }
     </script>
