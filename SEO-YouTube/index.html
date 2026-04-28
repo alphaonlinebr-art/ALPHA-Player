@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Analizador SEO v3 - Consultor de Títulos</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0f0f0f; color: #fff; padding: 20px; }
+        .box { max-width: 1100px; margin: auto; background: #1a1a1a; padding: 25px; border-radius: 15px; border: 1px solid #333; }
+        h1 { color: #ff0000; text-align: center; margin-bottom: 5px; }
+        .search-area { text-align: center; margin-bottom: 30px; }
+        input { width: 60%; padding: 15px; background: #000; border: 1px solid #444; color: #fff; border-radius: 5px; font-size: 16px; }
+        button { padding: 15px 30px; background: #ff0000; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        
+        .main-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
+        .left-col { display: flex; flex-direction: column; gap: 20px; }
+        
+        .card { background: #252525; padding: 20px; border-radius: 10px; border: 1px solid #333; }
+        .score-big { font-size: 50px; font-weight: bold; display: block; margin: 10px 0; }
+        
+        .metric-container { text-align: left; margin-top: 10px; }
+        .bar-label { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px; }
+        .bar-bg { background: #444; height: 12px; border-radius: 6px; overflow: hidden; }
+        .bar-fill { height: 100%; width: 0%; transition: all 0.8s ease; }
+
+        .dicas-card { background: #1e1e2e; border: 1px solid #4444ff; color: #e0e0ff; }
+        .dica-item { background: rgba(255,255,255,0.05); padding: 10px; border-left: 4px solid #4444ff; margin-bottom: 10px; font-size: 14px; }
+        .lista-videos { font-size: 13px; color: #bbb; line-height: 1.6; }
+        .highlight { color: #55ff55; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h1>MEU CONSULTOR SEO @Enigmas</h1>
+    <div class="search-area">
+        <input type="text" id="termo" placeholder="Digite o título que você pensou para o vídeo...">
+        <button onclick="pesquisar()">ANALISAR TÍTULO</button>
+    </div>
+
+    <div id="painel" style="display: none;" class="main-grid">
+        
+        <div class="left-col">
+            <div class="card" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div style="text-align: center;">
+                    <span style="font-size: 14px;">Chance de Ranquear</span>
+                    <span id="score" class="score-big">--</span>
+                    <div id="status-txt" style="font-weight: bold;">Analisando...</div>
+                </div>
+                <div>
+                    <div class="metric-container">
+                        <div class="bar-label"><span>Volume de Busca</span> <span id="vol-txt">--</span></div>
+                        <div class="bar-bg"><div id="vol-bar" class="bar-fill"></div></div>
+                    </div>
+                    <div class="metric-container">
+                        <div class="bar-label"><span>Competição</span> <span id="comp-txt">--</span></div>
+                        <div class="bar-bg"><div id="comp-bar" class="bar-fill"></div></div>
+                    </div>
+                    <div class="metric-container">
+                        <div class="bar-label"><span>Otimização</span> <span id="opt-txt">--</span></div>
+                        <div class="bar-bg"><div id="opt-bar" class="bar-fill"></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <strong style="color: #ff4444;">OS "DONOS" ATUAIS DESSE TERMO:</strong>
+                <div id="lista" class="lista-videos" style="margin-top: 10px;"></div>
+            </div>
+        </div>
+
+        <div class="card dicas-card">
+            <h3 style="margin-top: 0; color: #8888ff;">💡 DICAS DO CONSULTOR</h3>
+            <div id="dicas-lista">
+                </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    const MINHA_CHAVE = 'AIzaSyDQIkuTmYdybSkn9Q_9ChdIY5i7F7aW4Ac'; 
+
+    async function pesquisar() {
+        const termo = document.getElementById('termo').value;
+        if(!termo) return;
+
+        const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=${encodeURIComponent(termo)}&type=video&key=${MINHA_CHAVE}`;
+        
+        try {
+            const response = await fetch(url);
+            const data = await response.json();
+            document.getElementById('painel').style.display = 'grid';
+            exibirResultados(data.items, termo);
+        } catch (e) { alert("Erro na conexão."); }
+    }
+
+    function exibirResultados(videos, termo) {
+        const lista = document.getElementById('lista');
+        const dicasLista = document.getElementById('dicas-lista');
+        lista.innerHTML = "";
+        dicasLista.innerHTML = "";
+
+        // Cálculos
+        let volPct = Math.min(95, Math.max(20, 105 - (termo.length * 1.5)));
+        let matches = 0;
+        videos.forEach(v => { if(v.snippet.title.toLowerCase().includes(termo.toLowerCase())) matches++; });
+        let compPct = Math.round((matches / 5) * 100);
+        let optPct = termo.split(" ").length > 3 ? 90 : 50;
+        let finalScore = Math.round((volPct + (100 - compPct) + optPct) / 3);
+
+        // Atualizar Visual
+        atualizarBarra('vol', volPct);
+        atualizarBarra('comp', compPct, true);
+        atualizarBarra('opt', optPct);
+        
+        document.getElementById('score').innerText = finalScore;
+        document.getElementById('score').style.color = finalScore > 70 ? "#55ff55" : "#ffbb33";
+        document.getElementById('status-txt').innerText = finalScore > 70 ? "VÍDEO PROMISSOR" : "TEMA DIFÍCIL";
+
+        // --- GERAÇÃO DE DICAS (A MÁGICA) ---
+        const adicionarDica = (txt) => {
+            const div = document.createElement('div');
+            div.className = 'dica-item';
+            div.innerHTML = txt;
+            dicasLista.appendChild(div);
+        };
+
+        if(termo.length < 20) {
+            adicionarDica("⚠️ <b>Título muito curto!</b> Tente adicionar detalhes como 'O Segredo' ou 'A Verdade sobre...' para atrair mais cliques.");
+        }
+        
+        if(!termo.toLowerCase().includes("revelado") && !termo.toLowerCase().includes("mistério")) {
+            adicionarDica("🚀 <b>Dica de Ouro:</b> Use palavras de impacto como <span class='highlight'>'Revelado'</span> ou <span class='highlight'>'A Verdade'</span> para aumentar o CTR.");
+        }
+
+        if(compPct > 50) {
+            adicionarDica("🔥 <b>Alta Competição!</b> Tente focar no nicho. Em vez de '" + termo + "', tente algo como '" + termo + " na visão de Sophia'.");
+        } else {
+            adicionarDica("✅ <b>Caminho Livre!</b> Poucos canais usam essa frase exata. Use isso a seu favor no título e na primeira linha da descrição.");
+        }
+
+        videos.forEach(v => {
+            const item = document.createElement('div');
+            item.innerHTML = `• <b>${v.snippet.title}</b><br><small>Canal: ${v.snippet.channelTitle}</small><br><br>`;
+            lista.appendChild(item);
+        });
+    }
+
+    function atualizarBarra(id, pct, inverse = false) {
+        const fill = document.getElementById(id + '-bar');
+        const txt = document.getElementById(id + '-txt');
+        fill.style.width = pct + "%";
+        let cor = "#ff4444";
+        if(inverse) {
+            cor = pct < 30 ? "#55ff55" : (pct < 60 ? "#ffbb33" : "#ff4444");
+        } else {
+            cor = pct > 70 ? "#55ff55" : (pct > 40 ? "#ffbb33" : "#ff4444");
+        }
+        fill.style.backgroundColor = cor;
+        txt.innerText = pct + "%";
+    }
+</script>
+</body>
+</html>
