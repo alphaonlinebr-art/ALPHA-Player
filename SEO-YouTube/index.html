@@ -2,71 +2,72 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Arsenal SEO v7 - Edição Suprema</title>
+    <title>Arsenal SEO v8 - Engenharia Reversa</title>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; background: #0f0f0f; color: #fff; padding: 15px; margin: 0; }
-        .box { max-width: 1350px; margin: auto; background: #1a1a1a; padding: 20px; border-radius: 15px; border: 1px solid #333; }
+        body { font-family: 'Segoe UI', sans-serif; background: #0b0b0b; color: #fff; padding: 10px; margin: 0; }
+        .box { max-width: 1400px; margin: auto; background: #161616; padding: 20px; border-radius: 12px; border: 1px solid #2a2a2a; }
         .search-area { text-align: center; margin-bottom: 20px; }
-        input { width: 50%; padding: 12px; background: #000; border: 1px solid #444; color: #fff; border-radius: 5px; }
-        button { padding: 12px 25px; background: #ff0000; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        input { width: 45%; padding: 12px; background: #000; border: 1px solid #333; color: #fff; border-radius: 6px; font-size: 15px; }
+        button { padding: 12px 25px; background: #ff0000; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
         
         .main-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; }
-        .card { background: #252525; padding: 15px; border-radius: 10px; border: 1px solid #333; height: fit-content; }
+        .card { background: #1e1e1e; padding: 15px; border-radius: 10px; border: 1px solid #333; }
         
-        /* Estilo Barras */
-        .metric-container { margin-top: 10px; }
-        .bar-label { display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 3px; }
-        .bar-bg { background: #444; height: 10px; border-radius: 5px; overflow: hidden; }
-        .bar-fill { height: 100%; width: 0%; transition: all 0.8s ease; }
+        /* Barras Otimizadas */
+        .metric-container { margin-top: 12px; }
+        .bar-label { display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 4px; color: #aaa; }
+        .bar-bg { background: #333; height: 8px; border-radius: 4px; overflow: hidden; }
+        .bar-fill { height: 100%; width: 0%; transition: all 1s ease-out; }
 
-        /* Estilo Conteúdo */
-        .suggestion-item { background: #1e1e1e; padding: 8px; margin: 5px 0; border-left: 3px solid #ff0000; font-size: 12px; }
-        .tag-item { background: #333; padding: 3px 8px; border-radius: 4px; font-size: 11px; color: #55ff55; border: 1px solid #444; display: inline-block; margin: 2px; }
-        .label-red { color: #ff4444; font-weight: bold; text-transform: uppercase; font-size: 11px; display: block; margin-bottom: 8px; }
-        .score-big { font-size: 35px; font-weight: bold; color: #55ff55; display: block; }
-        .btn-copy { background: #444; color: #fff; padding: 5px 10px; border: none; border-radius: 4px; cursor: pointer; font-size: 11px; margin-top: 10px; width: 100%; }
+        /* Conteúdo Variado */
+        .suggestion-item { background: #121212; padding: 10px; margin: 6px 0; border-left: 3px solid #ff0000; font-size: 12px; border-radius: 0 4px 4px 0; }
+        .tag-item { background: #2a2a2a; padding: 4px 10px; border-radius: 20px; font-size: 11px; color: #44ff44; border: 1px solid #3d3d3d; display: inline-block; margin: 3px; }
+        .label-red { color: #ff3333; font-weight: bold; text-transform: uppercase; font-size: 11px; margin-bottom: 10px; display: block; border-bottom: 1px solid #333; padding-bottom: 5px; }
+        .score-big { font-size: 42px; font-weight: bold; color: #44ff44; }
+        .btn-copy { background: #ff0000; color: #fff; padding: 8px; border: none; border-radius: 4px; cursor: pointer; font-size: 11px; margin-top: 15px; width: 100%; font-weight: bold; }
     </style>
 </head>
 <body>
 
 <div class="box">
-    <h2 style="text-align:center; color:#ff0000; margin: 0 0 15px 0;">ARSENAL SEO SUPREMO @Enigmas</h2>
+    <h2 style="text-align:center; color:#ff0000; margin: 0 0 20px 0; letter-spacing: 2px;">ARSENAL SEO v8 @Enigmas</h2>
 
     <div class="search-area">
-        <input type="text" id="termo" placeholder="Tema do vídeo...">
-        <button onclick="pesquisar()">GERAR TUDO</button>
+        <input type="text" id="termo" placeholder="Digite seu tema principal...">
+        <button onclick="pesquisar()">DECOSTRUR ALGORITMO</button>
     </div>
 
     <div id="painel" style="display: none;" class="main-grid">
         
         <div class="col">
             <div class="card">
-                <span class="label-red">Chance de Sucesso</span>
-                <div style="display:flex; align-items:center; justify-content:space-around;">
+                <span class="label-red">Análise de Potencial</span>
+                <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:15px;">
                     <span id="score" class="score-big">--</span>
-                    <div id="status-txt" style="font-size:11px; font-weight:bold;">Analizando...</div>
+                    <div id="status-txt" style="font-size:12px; text-align:right;">Calculando...</div>
                 </div>
-                <div class="metric-container"><div class="bar-label"><span>Volume</span><span id="vol-txt">--</span></div><div class="bar-bg"><div id="vol-bar" class="bar-fill"></div></div></div>
+                <div class="metric-container"><div class="bar-label"><span>Volume de Busca</span><span id="vol-txt">--</span></div><div class="bar-bg"><div id="vol-bar" class="bar-fill"></div></div></div>
                 <div class="metric-container"><div class="bar-label"><span>Competição</span><span id="comp-txt">--</span></div><div class="bar-bg"><div id="comp-bar" class="bar-fill"></div></div></div>
+                <div class="metric-container"><div class="bar-label"><span>Otimização SEO</span><span id="opt-txt">--</span></div><div class="bar-bg"><div id="opt-bar" class="bar-fill"></div></div></div>
             </div>
 
             <div class="card" style="margin-top:15px;">
-                <span class="label-red">👁️ Domínio de Mercado (Top 5)</span>
-                <div id="lista" style="font-size: 11px; color: #bbb; line-height: 1.4;"></div>
+                <span class="label-red">👁️ Dominando o Nicho (Top 5)</span>
+                <div id="lista" style="font-size: 11px; color: #999; line-height: 1.5;"></div>
             </div>
         </div>
 
         <div class="col">
-            <div class="card" style="border: 1px solid #55ff55; min-height: 400px;">
-                <span class="label-red" style="color:#55ff55;">🏷️ 20 Tags Estratégicas</span>
-                <div id="tag-container"></div>
-                <button class="btn-copy" onclick="copiarTags()">Copiar Todas as Tags</button>
+            <div class="card" style="border: 1px solid #44ff44; min-height: 480px;">
+                <span class="label-red" style="color:#44ff44;">🏷️ 20 Tags de Alta Conversão</span>
+                <div id="tag-container" style="max-height: 380px; overflow-y: auto;"></div>
+                <button class="btn-copy" onclick="copiarTags()">COPIAR TAGS PARA O YOUTUBE</button>
             </div>
         </div>
 
         <div class="col">
-            <div class="card" style="border: 1px solid #ff4444;">
-                <span class="label-red">🔥 10 Títulos de Alta Performance</span>
+            <div class="card" style="border: 1px solid #ff0000;">
+                <span class="label-red">🔥 10 Títulos Magnéticos</span>
                 <div id="sugestoes"></div>
             </div>
         </div>
@@ -87,39 +88,49 @@
             const data = await response.json();
             document.getElementById('painel').style.display = 'grid';
             processarTudo(data.items, termo);
-        } catch (e) { alert("Erro de conexão."); }
+        } catch (e) { alert("Erro na API."); }
     }
 
     function processarTudo(videos, termo) {
-        let volPct = Math.min(95, Math.max(20, 105 - (termo.length * 1.5)));
+        // Lógica de Barras (As 3 Estão Aqui!)
+        let volPct = Math.min(95, Math.max(25, 105 - (termo.length * 1.2)));
         let matches = 0;
-        videos.forEach(v => { if(v.snippet.title.toLowerCase().includes(termo.toLowerCase())) matches++; });
+        videos.forEach(v => { if(v.snippet.title.toLowerCase().includes(termo.toLowerCase().split(" ")[0])) matches++; });
         let compPct = Math.round((matches / 5) * 100);
-        let finalScore = Math.round((volPct + (100 - compPct) + 90) / 3);
+        let optPct = termo.length > 20 ? 98 : 70;
+        let finalScore = Math.round((volPct + (100 - compPct) + optPct) / 3);
 
         atualizarBarra('vol', volPct);
         atualizarBarra('comp', compPct, true);
+        atualizarBarra('opt', optPct);
         document.getElementById('score').innerText = finalScore;
-        document.getElementById('status-txt').innerText = finalScore > 70 ? "PROMISSOR" : "REVER SEO";
+        document.getElementById('status-txt').innerText = finalScore > 75 ? "MUITO PROMISSOR" : "SEO MODERADO";
 
-        // Lista Concorrentes (DE VOLTA!)
+        // Concorrentes
         const lista = document.getElementById('lista');
         lista.innerHTML = "";
         videos.forEach(v => {
-            lista.innerHTML += `• <b>${v.snippet.title.substring(0,40)}...</b><br><small style="color:#888">${v.snippet.channelTitle}</small><br><br>`;
+            lista.innerHTML += `• <b>${v.snippet.title.substring(0,45)}...</b><br><span style="color:#666">${v.snippet.channelTitle}</span><br><br>`;
         });
 
-        // Títulos
+        // Títulos Magnéticos
         const sugestoesDiv = document.getElementById('sugestoes');
         sugestoesDiv.innerHTML = "";
-        const modelos = [`A VERDADE: ${termo}`, `O Perigo de ${termo}`, `O Guia de ${termo}`, `Mistérios de ${termo}`, `Gnose e ${termo}`, `Despertar: ${termo}`, `Segredos de ${termo}`, `O Lado Oculto: ${termo}`, `Arquétipo ${termo}`, `CUIDADO com ${termo}`];
+        const modelos = [`A VERDADE: ${termo}`, `O Perigo de ${termo}`, `O Segredo Oculto de ${termo}`, `${termo}: Guia Psicológico`, `Gnose e ${termo}: A Conexão`, `Por que ${termo} Assusta?`, `3 Mistérios sobre ${termo}`, `Evolução e ${termo}`, `Arquétipo ${termo} Explicado`, `A Face Oculta de ${termo}`];
         modelos.forEach(t => { sugestoesDiv.innerHTML += `<div class="suggestion-item">${t}</div>`; });
 
-        // Tags
+        // Tags Inteligentes (Variações Reais)
         const tagContainer = document.getElementById('tag-container');
         tagContainer.innerHTML = "";
-        let tagsArray = [termo, `segredos ${termo}`, `verdade ${termo}`, `simbolismo ${termo}`, `zodiaco`, `astrologia`, `gnose`, `arquétipos` ];
-        while(tagsArray.length < 20) tagsArray.push(`${termo} ${tagsArray.length}`);
+        const complementos = ["significado", "personalidade", "no amor", "mapa astral", "características", "psicologia", "mitologia", "espiritualidade", "gnose", "zodiaco", "astrologia 2026", "segredos", "despertar"];
+        let tagsArray = [termo];
+        
+        // Mistura o termo com complementos variados
+        complementos.forEach(c => {
+            tagsArray.push(`${termo} ${c}`);
+            if(tagsArray.length < 20) tagsArray.push(`${c} ${termo.split(" ")[0]}`);
+        });
+
         tagsArray = [...new Set(tagsArray)].slice(0, 20);
         tagsGlobais = tagsArray.join(", ");
         tagsArray.forEach(tag => { tagContainer.innerHTML += `<span class="tag-item">${tag}</span>`; });
@@ -129,13 +140,13 @@
         const fill = document.getElementById(id + '-bar');
         const txt = document.getElementById(id + '-txt');
         fill.style.width = pct + "%";
-        fill.style.backgroundColor = (inverse ? (pct < 35 ? "#55ff55" : "#ff4444") : (pct > 65 ? "#55ff55" : "#ff4444"));
+        fill.style.backgroundColor = (inverse ? (pct < 30 ? "#44ff44" : (pct < 70 ? "#ffaa00" : "#ff3333")) : (pct > 70 ? "#44ff44" : (pct > 30 ? "#ffaa00" : "#ff3333")));
         txt.innerText = pct + "%";
     }
 
     function copiarTags() {
         navigator.clipboard.writeText(tagsGlobais);
-        alert("Tags copiadas!");
+        alert("20 Tags Estratégicas Copiadas!");
     }
 </script>
 </body>
