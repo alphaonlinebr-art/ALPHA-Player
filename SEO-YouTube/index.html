@@ -2,50 +2,78 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Analizador SEO v4 - Gerador de Títulos</title>
+    <title>Analizador SEO v5 - O Arsenal Completo</title>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; background: #0f0f0f; color: #fff; padding: 20px; }
-        .box { max-width: 1200px; margin: auto; background: #1a1a1a; padding: 25px; border-radius: 15px; border: 1px solid #333; }
-        .main-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; margin-top: 20px; }
-        input { width: 70%; padding: 15px; background: #000; border: 1px solid #444; color: #fff; border-radius: 5px; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #0f0f0f; color: #fff; padding: 20px; }
+        .box { max-width: 1250px; margin: auto; background: #1a1a1a; padding: 25px; border-radius: 15px; border: 1px solid #333; }
+        .search-area { text-align: center; margin-bottom: 30px; }
+        input { width: 60%; padding: 15px; background: #000; border: 1px solid #444; color: #fff; border-radius: 5px; font-size: 16px; }
         button { padding: 15px 30px; background: #ff0000; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
-        .card { background: #252525; padding: 20px; border-radius: 10px; margin-bottom: 20px; }
-        .suggestion-item { background: #333; padding: 10px; margin: 8px 0; border-left: 4px solid #ff0000; border-radius: 4px; font-size: 14px; cursor: pointer; transition: 0.3s; }
-        .suggestion-item:hover { background: #444; transform: translateX(5px); }
-        .score { font-size: 40px; font-weight: bold; color: #4caf50; }
-        .label-red { color: #ff4444; font-weight: bold; text-transform: uppercase; font-size: 12px; }
+        
+        .main-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
+        .card { background: #252525; padding: 20px; border-radius: 10px; border: 1px solid #333; margin-bottom: 20px; }
+        
+        /* Estilo das Barras Reais */
+        .metric-container { margin-top: 15px; }
+        .bar-label { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 5px; }
+        .bar-bg { background: #444; height: 12px; border-radius: 6px; overflow: hidden; }
+        .bar-fill { height: 100%; width: 0%; transition: all 0.8s ease; }
+
+        /* Estilo das Sugestões */
+        .suggestion-item { background: #1e1e1e; padding: 12px; margin: 8px 0; border-left: 4px solid #ff0000; border-radius: 4px; font-size: 13px; color: #ddd; }
+        .score-big { font-size: 45px; font-weight: bold; display: block; }
+        .label-red { color: #ff4444; font-weight: bold; text-transform: uppercase; font-size: 12px; margin-bottom: 10px; display: block; }
     </style>
 </head>
 <body>
 
 <div class="box">
-    <h1 style="text-align:center; color:#ff0000;">MEU CONSULTOR ESTRATÉGICO @Enigmas</h1>
-    
-    <div style="text-align: center;">
-        <input type="text" id="termo" placeholder="Digite seu tema (Ex: Lua em Áries)">
-        <button onclick="pesquisar()">GERAR ESTRATÉGIA</button>
+    <h1 style="text-align:center; color:#ff0000; margin-bottom: 5px;">ARSENAL SEO @Enigmas</h1>
+    <p style="text-align:center; color: #888; margin-bottom: 25px;">Análise de Dados + Inteligência de Títulos</p>
+
+    <div class="search-area">
+        <input type="text" id="termo" placeholder="Digite seu tema principal...">
+        <button onclick="pesquisar()">ANALISAR E GERAR</button>
     </div>
 
-    <div id="painel" class="main-grid" style="display: none;">
+    <div id="painel" style="display: none;" class="main-grid">
+        
         <div class="left-col">
-            <div class="card">
-                <div class="label-red">Status da Oportunidade</div>
-                <div id="score" class="score">--</div>
-                <div id="status-txt">Analisando Viabilidade...</div>
+            <div class="card" style="display: grid; grid-template-columns: 1fr 1.5fr; gap: 25px;">
+                <div style="text-align: center; border-right: 1px solid #333;">
+                    <span class="label-red">Chance de Sucesso</span>
+                    <span id="score" class="score-big">--</span>
+                    <div id="status-txt" style="font-weight: bold; font-size: 14px;">Calculando...</div>
+                </div>
+                <div>
+                    <div class="metric-container">
+                        <div class="bar-label"><span>Volume de Busca</span> <span id="vol-txt">--</span></div>
+                        <div class="bar-bg"><div id="vol-bar" class="bar-fill"></div></div>
+                    </div>
+                    <div class="metric-container">
+                        <div class="bar-label"><span>Competição (Menor é melhor)</span> <span id="comp-txt">--</span></div>
+                        <div class="bar-bg"><div id="comp-bar" class="bar-fill"></div></div>
+                    </div>
+                    <div class="metric-container">
+                        <div class="bar-label"><span>Otimização do Título</span> <span id="opt-txt">--</span></div>
+                        <div class="bar-bg"><div id="opt-bar" class="bar-fill"></div></div>
+                    </div>
+                </div>
             </div>
-            
+
             <div class="card">
-                <div class="label-red">Domínio de Mercado (Top 5)</div>
-                <div id="lista" style="font-size: 13px; margin-top:10px;"></div>
+                <span class="label-red">Domínio de Mercado (Top 5)</span>
+                <div id="lista" style="font-size: 13px; color: #bbb; line-height: 1.6;"></div>
             </div>
         </div>
 
         <div class="right-col">
-            <div class="card" style="border: 1px solid #ff0000;">
-                <div class="label-red">🔥 10 Títulos Sugeridos (Alta Performance)</div>
-                <div id="sugestoes" style="margin-top:10px;"></div>
+            <div class="card" style="border: 1px solid #ff4444;">
+                <span class="label-red">🔥 10 Títulos de Alta Performance</span>
+                <div id="sugestoes"></div>
             </div>
         </div>
+
     </div>
 </div>
 
@@ -55,47 +83,67 @@
     async function pesquisar() {
         const termo = document.getElementById('termo').value;
         if(!termo) return;
-
         const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=${encodeURIComponent(termo)}&type=video&key=${MINHA_CHAVE}`;
-        
         try {
             const response = await fetch(url);
             const data = await response.json();
             document.getElementById('painel').style.display = 'grid';
-            exibirResultados(data.items, termo);
-        } catch (e) { alert("Erro na conexão."); }
+            processarDados(data.items, termo);
+        } catch (e) { alert("Erro de conexão."); }
     }
 
-    function exibirResultados(videos, termo) {
+    function processarDados(videos, termo) {
         const lista = document.getElementById('lista');
         const sugestoesDiv = document.getElementById('sugestoes');
-        lista.innerHTML = "";
-        sugestoesDiv.innerHTML = "";
+        lista.innerHTML = ""; sugestoesDiv.innerHTML = "";
+
+        // Lógica das Barras (Recuperada)
+        let volPct = Math.min(95, Math.max(20, 105 - (termo.length * 1.5)));
+        let matches = 0;
+        videos.forEach(v => { if(v.snippet.title.toLowerCase().includes(termo.toLowerCase())) matches++; });
+        let compPct = Math.round((matches / 5) * 100);
+        let optPct = termo.split(" ").length > 3 ? 92 : 60;
+        let finalScore = Math.round((volPct + (100 - compPct) + optPct) / 3);
+
+        // Atualizar Visual das Barras
+        atualizarBarra('vol', volPct);
+        atualizarBarra('comp', compPct, true);
+        atualizarBarra('opt', optPct);
         
+        document.getElementById('score').innerText = finalScore;
+        document.getElementById('score').style.color = finalScore > 70 ? "#55ff55" : "#ffbb33";
+        document.getElementById('status-txt').innerText = finalScore > 70 ? "VÍDEO PROMISSOR" : "REQUER MAIS SEO";
+
+        // Exibir Concorrentes
         videos.forEach(v => {
-            lista.innerHTML += `<div style="margin-bottom:8px;">• <strong>${v.snippet.title}</strong><br><small style="color:#aaa;">${v.snippet.channelTitle}</small></div>`;
+            lista.innerHTML += `• <b>${v.snippet.title}</b><br><small>${v.snippet.channelTitle}</small><br><br>`;
         });
 
-        // Modelos de Títulos Estratégicos
+        // Gerar 10 Sugestões Magnéticas
         const modelos = [
-            `A VERDADE REVELADA: ${termo} e o que ninguém te conta`,
-            `O Perigo Oculto de ${termo}: Você está preparado?`,
-            `${termo}: O Guia Definitivo da Psicologia Simbólica`,
-            `Por que ${termo} define o seu Destino? (Entenda agora)`,
-            `O Despertar: Como ${termo} influencia sua Evolução`,
-            `Mistérios do Zodíaco: O Segredo de ${termo}`,
-            `Gnose e Simbolismo: A face oculta de ${termo}`,
-            `3 Coisas que você PRECISA saber sobre ${termo}`,
-            `A Sombra de ${termo}: O que a Astrologia não diz`,
-            `Arquétipos do Poder: O significado real de ${termo}`
+            `A VERDADE REVELADA: ${termo} e o segredo oculto`,
+            `O Perigo de ${termo}: Por que ninguém fala disso?`,
+            `${termo}: O Guia Definitivo do Despertar`,
+            `Por que ${termo} define o seu destino espiritual?`,
+            `Mistérios do Zodíaco: A face oculta de ${termo}`,
+            `Gnose e Simbolismo: O significado real de ${termo}`,
+            `3 Erros fatais que você comete sobre ${termo}`,
+            `O Despertar da Consciência: ${termo} explicado`,
+            `${termo}: A Chave para entender a Matriz`,
+            `Arquétipos do Poder: O que ${termo} diz sobre você`
         ];
+        modelos.forEach(t => { sugestoesDiv.innerHTML += `<div class="suggestion-item">${t}</div>`; });
+    }
 
-        modelos.forEach(titulo => {
-            sugestoesDiv.innerHTML += `<div class="suggestion-item">${titulo}</div>`;
-        });
-
-        document.getElementById('score').innerText = "88";
-        document.getElementById('status-txt').innerText = "TEMA ALTAMENTE LUCRATIVO";
+    function atualizarBarra(id, pct, inverse = false) {
+        const fill = document.getElementById(id + '-bar');
+        const txt = document.getElementById(id + '-txt');
+        fill.style.width = pct + "%";
+        let cor = "#ff4444";
+        if(inverse) { cor = pct < 35 ? "#55ff55" : (pct < 65 ? "#ffbb33" : "#ff4444"); }
+        else { cor = pct > 65 ? "#55ff55" : (pct > 35 ? "#ffbb33" : "#ff4444"); }
+        fill.style.backgroundColor = cor;
+        txt.innerText = pct + "%";
     }
 </script>
 </body>
