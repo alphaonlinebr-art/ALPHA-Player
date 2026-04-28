@@ -2,74 +2,75 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Arsenal SEO v6 - Títulos & Tags</title>
+    <title>Arsenal SEO v7 - Edição Suprema</title>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; background: #0f0f0f; color: #fff; padding: 20px; }
-        .box { max-width: 1250px; margin: auto; background: #1a1a1a; padding: 25px; border-radius: 15px; border: 1px solid #333; }
-        .search-area { text-align: center; margin-bottom: 30px; }
-        input { width: 60%; padding: 15px; background: #000; border: 1px solid #444; color: #fff; border-radius: 5px; font-size: 16px; }
-        button { padding: 15px 30px; background: #ff0000; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        body { font-family: 'Segoe UI', sans-serif; background: #0f0f0f; color: #fff; padding: 15px; margin: 0; }
+        .box { max-width: 1350px; margin: auto; background: #1a1a1a; padding: 20px; border-radius: 15px; border: 1px solid #333; }
+        .search-area { text-align: center; margin-bottom: 20px; }
+        input { width: 50%; padding: 12px; background: #000; border: 1px solid #444; color: #fff; border-radius: 5px; }
+        button { padding: 12px 25px; background: #ff0000; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
         
-        .main-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 20px; }
-        .card { background: #252525; padding: 20px; border-radius: 10px; border: 1px solid #333; margin-bottom: 20px; }
+        .main-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; }
+        .card { background: #252525; padding: 15px; border-radius: 10px; border: 1px solid #333; height: fit-content; }
         
-        /* Barras */
-        .metric-container { margin-top: 15px; }
-        .bar-label { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 5px; }
-        .bar-bg { background: #444; height: 12px; border-radius: 6px; overflow: hidden; }
+        /* Estilo Barras */
+        .metric-container { margin-top: 10px; }
+        .bar-label { display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 3px; }
+        .bar-bg { background: #444; height: 10px; border-radius: 5px; overflow: hidden; }
         .bar-fill { height: 100%; width: 0%; transition: all 0.8s ease; }
 
-        /* Sugestões e Tags */
-        .suggestion-item { background: #1e1e1e; padding: 10px; margin: 5px 0; border-left: 3px solid #ff0000; font-size: 13px; }
-        .tag-cloud { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
-        .tag-item { background: #333; padding: 5px 10px; border-radius: 4px; font-size: 12px; color: #55ff55; border: 1px solid #444; }
-        .score-big { font-size: 45px; font-weight: bold; color: #55ff55; }
-        .label-red { color: #ff4444; font-weight: bold; text-transform: uppercase; font-size: 12px; margin-bottom: 10px; display: block; }
-        
-        .btn-copy { background: #444; color: #fff; padding: 5px 10px; border: none; border-radius: 4px; cursor: pointer; font-size: 11px; margin-top: 10px; }
-        .btn-copy:hover { background: #666; }
+        /* Estilo Conteúdo */
+        .suggestion-item { background: #1e1e1e; padding: 8px; margin: 5px 0; border-left: 3px solid #ff0000; font-size: 12px; }
+        .tag-item { background: #333; padding: 3px 8px; border-radius: 4px; font-size: 11px; color: #55ff55; border: 1px solid #444; display: inline-block; margin: 2px; }
+        .label-red { color: #ff4444; font-weight: bold; text-transform: uppercase; font-size: 11px; display: block; margin-bottom: 8px; }
+        .score-big { font-size: 35px; font-weight: bold; color: #55ff55; display: block; }
+        .btn-copy { background: #444; color: #fff; padding: 5px 10px; border: none; border-radius: 4px; cursor: pointer; font-size: 11px; margin-top: 10px; width: 100%; }
     </style>
 </head>
 <body>
 
 <div class="box">
-    <h1 style="text-align:center; color:#ff0000; margin-bottom: 5px;">ARSENAL SEO @Enigmas</h1>
-    <p style="text-align:center; color: #888; margin-bottom: 25px;">Análise | Títulos Magnéticos | Tags Estratégicas</p>
+    <h2 style="text-align:center; color:#ff0000; margin: 0 0 15px 0;">ARSENAL SEO SUPREMO @Enigmas</h2>
 
     <div class="search-area">
-        <input type="text" id="termo" placeholder="Digite o tema (ex: Mulher de Áries)...">
-        <button onclick="pesquisar()">GERAR ESTRATÉGIA COMPLETA</button>
+        <input type="text" id="termo" placeholder="Tema do vídeo...">
+        <button onclick="pesquisar()">GERAR TUDO</button>
     </div>
 
     <div id="painel" style="display: none;" class="main-grid">
         
-        <div class="left-col">
-            <div class="card" style="display: grid; grid-template-columns: 1fr 1.5fr; gap: 20px;">
-                <div style="text-align: center;">
-                    <span class="label-red">Chance de Sucesso</span>
+        <div class="col">
+            <div class="card">
+                <span class="label-red">Chance de Sucesso</span>
+                <div style="display:flex; align-items:center; justify-content:space-around;">
                     <span id="score" class="score-big">--</span>
-                    <div id="status-txt" style="font-weight:bold; font-size:12px;">Analizando...</div>
+                    <div id="status-txt" style="font-size:11px; font-weight:bold;">Analizando...</div>
                 </div>
-                <div>
-                    <div class="metric-container"><div class="bar-label"><span>Volume</span><span id="vol-txt">--</span></div><div class="bar-bg"><div id="vol-bar" class="bar-fill"></div></div></div>
-                    <div class="metric-container"><div class="bar-label"><span>Competição</span><span id="comp-txt">--</span></div><div class="bar-bg"><div id="comp-bar" class="bar-fill"></div></div></div>
-                    <div class="metric-container"><div class="bar-label"><span>Otimização</span><span id="opt-txt">--</span></div><div class="bar-bg"><div id="opt-bar" class="bar-fill"></div></div></div>
-                </div>
+                <div class="metric-container"><div class="bar-label"><span>Volume</span><span id="vol-txt">--</span></div><div class="bar-bg"><div id="vol-bar" class="bar-fill"></div></div></div>
+                <div class="metric-container"><div class="bar-label"><span>Competição</span><span id="comp-txt">--</span></div><div class="bar-bg"><div id="comp-bar" class="bar-fill"></div></div></div>
             </div>
 
-            <div class="card" style="border: 1px solid #55ff55;">
-                <span class="label-red" style="color:#55ff55;">🏷️ 20 Tags Otimizadas para o YouTube</span>
-                <div id="tag-container" class="tag-cloud"></div>
-                <button class="btn-copy" onclick="copiarTags()">Copiá-las para o YouTube</button>
+            <div class="card" style="margin-top:15px;">
+                <span class="label-red">👁️ Domínio de Mercado (Top 5)</span>
+                <div id="lista" style="font-size: 11px; color: #bbb; line-height: 1.4;"></div>
             </div>
         </div>
 
-        <div class="right-col">
+        <div class="col">
+            <div class="card" style="border: 1px solid #55ff55; min-height: 400px;">
+                <span class="label-red" style="color:#55ff55;">🏷️ 20 Tags Estratégicas</span>
+                <div id="tag-container"></div>
+                <button class="btn-copy" onclick="copiarTags()">Copiar Todas as Tags</button>
+            </div>
+        </div>
+
+        <div class="col">
             <div class="card" style="border: 1px solid #ff4444;">
                 <span class="label-red">🔥 10 Títulos de Alta Performance</span>
                 <div id="sugestoes"></div>
             </div>
         </div>
+
     </div>
 </div>
 
@@ -90,65 +91,51 @@
     }
 
     function processarTudo(videos, termo) {
-        // Lógica de Barras
         let volPct = Math.min(95, Math.max(20, 105 - (termo.length * 1.5)));
         let matches = 0;
         videos.forEach(v => { if(v.snippet.title.toLowerCase().includes(termo.toLowerCase())) matches++; });
         let compPct = Math.round((matches / 5) * 100);
-        let optPct = termo.split(" ").length > 3 ? 94 : 65;
-        let finalScore = Math.round((volPct + (100 - compPct) + optPct) / 3);
+        let finalScore = Math.round((volPct + (100 - compPct) + 90) / 3);
 
         atualizarBarra('vol', volPct);
         atualizarBarra('comp', compPct, true);
-        atualizarBarra('opt', optPct);
         document.getElementById('score').innerText = finalScore;
+        document.getElementById('status-txt').innerText = finalScore > 70 ? "PROMISSOR" : "REVER SEO";
 
-        // Gerar Títulos
+        // Lista Concorrentes (DE VOLTA!)
+        const lista = document.getElementById('lista');
+        lista.innerHTML = "";
+        videos.forEach(v => {
+            lista.innerHTML += `• <b>${v.snippet.title.substring(0,40)}...</b><br><small style="color:#888">${v.snippet.channelTitle}</small><br><br>`;
+        });
+
+        // Títulos
         const sugestoesDiv = document.getElementById('sugestoes');
         sugestoesDiv.innerHTML = "";
-        const modelos = [
-            `A VERDADE REVELADA: ${termo} e o segredo oculto`,
-            `O Perigo de ${termo}: Por que ninguém fala disso?`,
-            `${termo}: O Guia Definitivo do Despertar`,
-            `Mistérios do Zodíaco: A face oculta de ${termo}`,
-            `Gnose e Simbolismo: O significado real de ${termo}`,
-            `O Despertar da Consciência: ${termo} explicado`,
-            `${termo}: A Chave para entender a Matriz`,
-            `Arquétipos do Poder: O que ${termo} diz sobre você`,
-            `A Sombra de ${termo}: O lado que ninguém conhece`,
-            `O que acontece quando você descobre sobre ${termo}?`
-        ];
+        const modelos = [`A VERDADE: ${termo}`, `O Perigo de ${termo}`, `O Guia de ${termo}`, `Mistérios de ${termo}`, `Gnose e ${termo}`, `Despertar: ${termo}`, `Segredos de ${termo}`, `O Lado Oculto: ${termo}`, `Arquétipo ${termo}`, `CUIDADO com ${termo}`];
         modelos.forEach(t => { sugestoesDiv.innerHTML += `<div class="suggestion-item">${t}</div>`; });
 
-        // Gerar 20 Tags (NOVA LÓGICA)
+        // Tags
         const tagContainer = document.getElementById('tag-container');
         tagContainer.innerHTML = "";
-        const bases = ["astrologia", "mistérios", "gnose", "espiritualidade", "zodíaco", "signos", "despertar", "arquétipos"];
-        let tagsArray = [termo, `segredos de ${termo}`, `verdade sobre ${termo}`, `simbolismo ${termo}`, `psicologia ${termo}`];
-        
-        bases.forEach(b => tagsArray.push(`${b} ${termo}`, b));
-        while(tagsArray.length < 20) tagsArray.push(`${termo} 2026`);
-        
-        tagsArray = [...new Set(tagsArray)].slice(0, 20); // Remove duplicadas e limita a 20
+        let tagsArray = [termo, `segredos ${termo}`, `verdade ${termo}`, `simbolismo ${termo}`, `zodiaco`, `astrologia`, `gnose`, `arquétipos` ];
+        while(tagsArray.length < 20) tagsArray.push(`${termo} ${tagsArray.length}`);
+        tagsArray = [...new Set(tagsArray)].slice(0, 20);
         tagsGlobais = tagsArray.join(", ");
-
-        tagsArray.forEach(tag => {
-            tagContainer.innerHTML += `<span class="tag-item">${tag}</span>`;
-        });
+        tagsArray.forEach(tag => { tagContainer.innerHTML += `<span class="tag-item">${tag}</span>`; });
     }
 
     function atualizarBarra(id, pct, inverse = false) {
         const fill = document.getElementById(id + '-bar');
         const txt = document.getElementById(id + '-txt');
         fill.style.width = pct + "%";
-        let cor = (inverse ? (pct < 35 ? "#55ff55" : (pct < 65 ? "#ffbb33" : "#ff4444")) : (pct > 65 ? "#55ff55" : (pct > 35 ? "#ffbb33" : "#ff4444")));
-        fill.style.backgroundColor = cor;
+        fill.style.backgroundColor = (inverse ? (pct < 35 ? "#55ff55" : "#ff4444") : (pct > 65 ? "#55ff55" : "#ff4444"));
         txt.innerText = pct + "%";
     }
 
     function copiarTags() {
         navigator.clipboard.writeText(tagsGlobais);
-        alert("Tags copiadas! Agora é só colar no YouTube Studio.");
+        alert("Tags copiadas!");
     }
 </script>
 </body>
